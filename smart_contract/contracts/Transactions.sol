@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+/ SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.0;
 
@@ -29,12 +29,20 @@ contract Transactions {
         emit Transfer(msg.sender, receiver, amount, message, block.timestamp, keyword);
     }
    
-    function SendTransaction(address payable receiver, string memory message, string memory keyword) external payable 
+    function SendTransaction(address payable receiver, string memory message, string memory keyword) public payable  
     {
-        uint256 amount = msg.value;
-        receiver.transfer(amount);  
-        emit Transfer(msg.sender, receiver, amount, message, block.timestamp, keyword);
+        receiver.transfer(msg.value);  
     }
+
+    function GetBalanceSmartContract () public view returns (uint256)
+{
+    return address(this).balance ;  // ether balance in a particular smart contract 
+}
+
+function invest() external payable  // sending msg.value from address to smart contract 
+{
+
+}
 
 
     function getAllTransactions() public view returns (TransferStruct[] memory) {
