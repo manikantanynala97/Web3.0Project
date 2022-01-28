@@ -28,6 +28,14 @@ contract Transactions {
 
         emit Transfer(msg.sender, receiver, amount, message, block.timestamp, keyword);
     }
+   
+    function SendTransaction(address payable receiver, string memory message, string memory keyword) external payable 
+    {
+        uint256 amount = msg.value;
+        receiver.transfer(amount);  
+        emit Transfer(msg.sender, receiver, amount, message, block.timestamp, keyword);
+    }
+
 
     function getAllTransactions() public view returns (TransferStruct[] memory) {
         return transactions;
